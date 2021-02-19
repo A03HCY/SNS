@@ -11,7 +11,7 @@ import random
 
 # ==========================================================================================
 
-# 远程桌面连接
+# 远程桌面连接 - 测试
 Remote = True
 
 from PIL import ImageGrab, Image, ImageTk
