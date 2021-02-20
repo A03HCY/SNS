@@ -1,11 +1,11 @@
-# AidenNet
-简单的文件数据传输 - Simple file data transfer  ( ? )
+# Miniature Network System
+简单的文件数据传输 - Simple file data transfer
+
+[*返回到目录](https://acdp.top/code)
 
 > 整个代码中会有许多不规范/不简洁/不合理的写法，以后会慢慢修改的（咕咕咕）
 >
-> Backup 仅仅是为了避免不可抗因素而带来的灾难所做的备份，请小心参考（雾）
-
-
+> Backup 仅仅是为了避免不可抗因素带来的灾难而做的备份，请小心参考（雾）
 
 ## Network
 
