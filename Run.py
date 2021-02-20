@@ -1,4 +1,5 @@
 from Core import *
+import sys
 
 __verson__ = '0.1.2'
 
@@ -16,4 +17,5 @@ class Runner(Network):
     def run(self):
         pass
 
-a = Network(1010, 'F6987ij42')
+a = Runner(1010, 'F6987ij42')
+a.run()
