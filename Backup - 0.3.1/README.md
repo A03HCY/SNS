@@ -1,2 +1,2 @@
-#Backup - 0.3.1
-已经具备了连接异常检测，方便移植到micropython
+# Backup - 0.3.1
+可以方便的移植到micropython开发板上
