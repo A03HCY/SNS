@@ -175,22 +175,24 @@ def Sizeset(B):
       return '{0:.2f} TB'.format(B/TB)
 
 class Cbar:
-    char = '█'
-    text = '\r|{b}| {done}/{size} [{sp} {ft} eta {dt}]'
+    char = '[36m━[0m'
+    back = '━'
+    en = ''
+    text = '\r Working... {en}{b}{en} [32m{cent}%[0m {done}/{size} {sp}   [35m{ft}[0m    '
+    final ='\r Successful {en}{b}{en} [32m{cent}%[0m {done}/{size} {sp}   [35m{ft}[0m    '
 
-    def __init__(self, size, head, lon=50):
+    def __init__(self, size, head, lon=60):
         self.time = time.time()
         self.start = time.time()
         self.done = 0
         self.size = size
         self.lon = lon
         self.head = head
-        print(' '+head)
     
-    def info(self, done):
+    def info(self, done, f=False):
         eta = datetime.timedelta(seconds=int(time.time()-self.start))
         cent = (done/self.size)
-        tex = self.char*int(self.lon*cent) + ' '*(self.lon-int(self.lon*cent))
+        tex = self.char*int(self.lon*cent) + self.back*(self.lon-int(self.lon*cent))
         try:spd = int((done - self.done) / (time.time() - self.time))
         except:return
         ftd = datetime.timedelta(seconds=int((self.size - done) / spd))
@@ -199,14 +201,19 @@ class Cbar:
         self.time = time.time()
         size = Sizeset(self.size)
         done = Sizeset(done)
-        done = ' '*(len(size)-len(done)) + done
-        spd = ' '*(8-len(spd)) + spd
-
-        print(self.text.format(b=tex,done=done, size=size, ft=ftd, sp=spd+'/s', dt=eta), end='')
-    
-    def done(self, text):
-        print('')
-        print(text)
+        done_font = ' '*(10-len(done))
+        spd_font = ' '*(10-len(spd))
+        done = done_font + done
+        spd = spd_font + spd
+        if f:
+            ttmp = self.final
+        else:
+            ttmp = self.text
+        cent = str(round(cent*100.0, 1))
+        if len(cent) < 5:
+            cent = ' '*(5-len(cent)) + cent
+        
+        print(ttmp.format(en=self.en, b=tex, cent=cent, done=done, size=size, ft=ftd, sp=spd+'/s'), end='')
 
 def Recv(clint, head, bar=None):
     size = 0
@@ -237,9 +244,9 @@ def Recv(clint, head, bar=None):
                     tim = time.time()
                     bar.info(size)
     if bar:
-        bar.info(size)
+        bar.info(size, True)
         print('')
-        time.sleep(0.01)
+        time.sleep(0.1)
     os.rename(head['path']+'.ftmp', head['path'])
     return True
 
@@ -261,9 +268,9 @@ def Send(clint, path, bar=None):
                     tim = time.time()
                     bar.info(size)
     if bar:
-        bar.info(size)
+        bar.info(size, True)
         print('')
-        time.sleep(0.01)
+        time.sleep(0.1)
     return True
 
 def listdir(path):
@@ -644,20 +651,20 @@ class Network:
     
 
 
+if __name__ == '__main__':
+    a = Network(1010, 'F6987ij42')
 
-a = Network(1010, 'F6987ij42')
+    rz = a.Connect({'ip':HostIP(),'port':1010,'name':'A03HCY_Aiden'}, 'F6987ij42')
+    print(rz)
+    print(a.GetTerminal())
+    print(a.Alive(rz))
 
-rz = a.Connect({'ip':HostIP(),'port':1010,'name':'A03HCY_Aiden'}, 'F6987ij42')
-print(rz)
-print(a.GetTerminal())
-print(a.Alive(rz))
-
-while True:
-    try:exec(input('>>> '))
-    except:pass
+    while True:
+        try:exec(input('>>> '))
+        except:pass
 
 if False:
-    a.File(rz, 'get', 'L:\\', 'I:\\BilibiliOS.7z')
+    a.File(rz, 'get', 'L:\\', "L:\Wild G@Mes 熊 工地.avi")
     a.File(rz, 'send', 'I:\\BilibiliOS.7z', 'L:\\')
     a.File(rz, 'list', '', 'K:\\')
     a.File(rz, 'stat', '', 'K:\\main.cpp')
@@ -665,3 +672,4 @@ if False:
     a.Cloud(rz, 'remove', '', 'K:\\c')
     a.Cloud(rz, 'move', 'K:\\tkinter-designer-master\\', 'K:\\tkinter-designer-master\\')
     a.Cloud(rz, 'copy', 'K:\\J\\', 'K:\\J')
+
