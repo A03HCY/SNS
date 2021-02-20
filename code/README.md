@@ -1,3 +1,4 @@
+```python
 #-*- coding:utf-8 -*-
 
 import threading as td
@@ -665,3 +666,4 @@ if False:
     a.Cloud(rz, 'remove', '', 'K:\\c')
     a.Cloud(rz, 'move', 'K:\\tkinter-designer-master\\', 'K:\\tkinter-designer-master\\')
     a.Cloud(rz, 'copy', 'K:\\J\\', 'K:\\J')
+```
