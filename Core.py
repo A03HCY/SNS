@@ -603,7 +603,7 @@ class Network:
             
             exa.send(mode.encode('utf-8'))
             exa.send(cloud.encode('utf-8'))
-            data = exa.recv(2048).decode('utf-8')
+            data = exa.recv(10240).decode('utf-8')
             if data == '<Error>':
                 return False
             data = json.loads(data)
