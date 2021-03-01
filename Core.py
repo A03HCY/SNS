@@ -297,7 +297,7 @@ class Execute(td.Thread):
         while True:
             # The client exited unexpectedly
             try:
-                data = self.cli.recv(128).decode("utf-8")
+                data = self.cli.recv(128).decode("utf-8") # data = json.dumps(data)[0]
             except:
                 data = '<disconnect>'
             if data == '<disconnect>':
