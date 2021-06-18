@@ -6,8 +6,6 @@ import time
 
 __verson__ = '0.3.1'
 
-'''Don't ask me why I write like this, I just like this style.'''
-
 def HostIP():
     try:
         s = line.socket(line.AF_INET, line.SOCK_DGRAM)
